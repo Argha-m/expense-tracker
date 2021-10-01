@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import './App.scss';
+import ExpenseTracker from './components/expenseTracker';
+import ExpenseForm from './components/expenseForm';
 
 function App() {
+  const [transctionData, setTransctionData ] = useState([]);
+
+  const handleCallback = (childData) => {
+    setTransctionData(transctionData => [...transctionData, childData]);
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Expanse Tracker</h1>
+      <ExpenseForm parentCallback={handleCallback} />
+      <ExpenseTracker transctionItems={transctionData} />
     </div>
   );
 }
